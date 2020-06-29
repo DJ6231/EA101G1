@@ -60,32 +60,32 @@ ${errorMsgs}<br>
 	
 <!-- 	<li> -->
 <!-- 		<form method="post" action="BounsMall.do"> -->
-<!-- 			<b>輸入紅利商品名稱：</b> -->
-<!-- 			<input type="text" name="BON_NAME"> -->
-<!-- 			<input type="hidden" name="action" value="getAll_For_Name"> -->
+<!-- 			<b>選擇紅利商品名稱：</b> -->
+<!-- 			<select size="1" name="BON_ID"> -->
+<%-- 				<c:forEach var="bmVO" items="${dao.all}"> --%>
+<%-- 					<option value="${bmVO.bon_id}">${bmVO.bon_id} --%>
+<%-- 				</c:forEach> --%>
+<!-- 			</select> -->
+<!-- 			<input type="hidden" name="action" value="getOne_For_Display"> -->
 <!-- 			<input type="submit" value="送出"> -->
 <!-- 		</form> -->
 <!-- 	</li> -->
 	
 	<li>
 		<form method="post" action="BounsMall.do">
-			<b>選擇紅利商品名稱：</b>
-			<select size="1" name="BON_ID">
-				<c:forEach var="bmVO" items="${dao.all}">
-					<option value="${bmVO.bon_id}">${bmVO.bon_id}
-				</c:forEach>
-			</select>
-			<input type="hidden" name="action" value="getOne_For_Display">
+			<b>輸入紅利商品名稱：</b>
+			<input type="text" name="bon_name">
+			<input type="hidden" name="action" value="getByName">
 			<input type="submit" value="送出">
 		</form>
 	</li>
 	
-	<li>
-		<form method="post" action="BounsMall.do">
-			<b>選擇紅利商品種類：</b>
-			<select></select>
-		</form>
-	</li>
+<!-- 	<li> -->
+<!-- 		<form method="post" action="BounsMall.do"> -->
+<!-- 			<b>選擇紅利商品種類：</b> -->
+<!-- 			<select></select> -->
+<!-- 		</form> -->
+<!-- 	</li> -->
 	
 </ul>
 

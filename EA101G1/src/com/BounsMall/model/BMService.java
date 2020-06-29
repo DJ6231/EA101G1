@@ -10,21 +10,17 @@ public class BMService {
 		dao = new BMDAO();
 	}
 	
-	public BMVO addByPK(String bon_id, String pt_id, String bon_name, int bon_price, byte[] bon_image,
-			String bon_info, int bon_exchange, int bon_stock, java.sql.Date bon_addDate, int bon_status ) {
+	public BMVO addByPK( String pt_id, String bon_name, int bon_price, byte[] bon_image,
+			String bon_info, int bon_stock ) {
 		
 		BMVO bmVO = new BMVO();
 		
-		bmVO.setBon_id(bon_id);
 		bmVO.setPt_id(pt_id);
 		bmVO.setBon_name(bon_name);
 		bmVO.setBon_price(bon_price);
 		bmVO.setBon_image(bon_image);
 		bmVO.setBon_info(bon_info);
-		bmVO.setBon_exchange(bon_exchange);
 		bmVO.setBon_stock(bon_stock);
-		bmVO.setBon_addDate(bon_addDate);
-		bmVO.setBon_status(bon_status);
 		
 		return bmVO;
 	}

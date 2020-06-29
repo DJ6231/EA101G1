@@ -65,7 +65,7 @@
 	</ul>
 </c:if>
 
-<form method="post" action="BounsMall.do" name="form1">
+<form method="post" action="beBM.do" name="form1">
 	<table>
 		<tr>
 			<td>商品名稱：</td>
@@ -73,9 +73,42 @@
 				value="<%= (bmVO==null)? "碧藍幻想 Versus" : bmVO.getBon_name()%>" /></td>
 		</tr>
 		<tr>
-			<td>所需紅利點數：</td>
+			<td>
+			所需紅利點數：
+			</td>
+			<td><input type="TEXT" name="bon_price" size="45"
+			 value="<%= (bmVO==null)? "50" : bmVO.getBon_price()%>" /></td>
 		</tr>
+		
+		<tr>
+			<td>紅利商品描述：</td>
+			<td><input type="TEXT" name="bon_info" size="45"
+			 value="<%= (bmVO==null)? "50" : bmVO.getBon_info()%>"/></td>
+		</tr>
+		<tr>
+			<td>紅利商品總量：</td>
+			<td><input type="TEXT" name="bon_stock" size="45"
+			 value="<%= (bmVO==null)? "50" : bmVO.getBon_stock()%>"/></td>
+		</tr>
+		
+		<jsp:useBean id="bmSvc" scope="page" class="com.BounsMall.model.BMService"/>
+		<tr>
+			<td>紅利商品圖片：</td>
+			<td><input type="image" name="bon_image" size="45"
+			 value="<%= (bmVO==null)? "50" : bmVO.getBon_info()%>"/></td>
+		</td>
+		<tr>
+			<td>商品分類編號：<font color=red><b>*</b></font></td>
+		<td><select size="1" name="pt_id">
+			<c:forEach var="bmVO" items="${bmSvc.all}">
+				<option value="${bsVO.pt_id}" ${(bsVO.pt_id==bmVO.pt_id)? 'selected':'PT001' } >${bmVO.pt_id}
+			</c:forEach>
+		</select></td>
+		</td>
 	</table>
+	<br>
+	<input type="hidden" name="action" value="insert">
+	<input type="submit" value="送出新增">
 </form>
 
 
