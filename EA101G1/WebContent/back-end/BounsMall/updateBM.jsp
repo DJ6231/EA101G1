@@ -132,4 +132,18 @@
 <input type="hidden" name="bon_id" value=${bmVO.bon_id}>
 <input type="submit" value="°e¥X­×§ï">
 </body>
+
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<style>
+	
+</style>
+
+<script>
+	
+</script>
+
 </html>
