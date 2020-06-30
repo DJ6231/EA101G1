@@ -30,6 +30,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BMServlet</servlet-name>
+		<url-pattern>/BounsMall/BounsMall.do</url-pattern>
 		<url-pattern>/front-end/BounsMall/BounsMall.do</url-pattern>
 		<url-pattern>/back-end/BounsMall/BounsMall.do</url-pattern>
 	</servlet-mapping>

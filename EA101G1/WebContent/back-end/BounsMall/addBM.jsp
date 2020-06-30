@@ -74,8 +74,8 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-
-	<form method="post" action="<%=request.getContextPath()%>/back-end/BounsMall/BounsMall.do" name="form1" enctype="multipart/form-data" >
+	
+	<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do" name="form1" enctype="multipart/form-data" >
 		<table>
 			<tr>
 				<td>商品名稱：</td>

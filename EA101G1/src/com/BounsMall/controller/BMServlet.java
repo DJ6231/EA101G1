@@ -4,10 +4,12 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.BounsMall.model.*;
 
+@MultipartConfig
 public class BMServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -128,50 +130,45 @@ public class BMServlet extends HttpServlet {
 			String fail = "/back-end/BounsMall/addBM.jsp";
 			
 			try {
-//				String bon_name = req.getParameter("bon_name");
-				String bon_name = "良值二代 皮卡丘配色 震動連發無線手把";
-//				if (bon_name == null || bon_name.trim().length() == 0) {
-//					errorMsgs.add("商品名稱: 請勿空白");
-//				}
+				String bon_name = req.getParameter("bon_name");
+				if (bon_name == null || bon_name.trim().length() == 0) {
+					errorMsgs.add("商品名稱: 請勿空白");
+				}
 				
-//				Integer bon_price = null;
-				Integer bon_price = 98;
-//				try {
-//					bon_price = new Integer (req.getParameter("bon_price").trim());
-//				} catch (NumberFormatException e) {
-//					bon_price = null;
-//					errorMsgs.add("價格請填數字.");
-//				}
+				Integer bon_price = null;
+				try {
+					bon_price = new Integer (req.getParameter("bon_price").trim());
+				} catch (NumberFormatException e) {
+					bon_price = null;
+					errorMsgs.add("價格請填數字.");
+				}
 				
-//				String bon_info = req.getParameter("bon_info").trim();
-				String bon_info = "提供保固六個月";
-//				if (bon_info == null || bon_info.trim().length() == 0) {
-//					errorMsgs.add("描述請勿空白");
-//				}
+				String bon_info = req.getParameter("bon_info").trim();
+				if (bon_info == null || bon_info.trim().length() == 0) {
+					errorMsgs.add("描述請勿空白");
+				}
 
-//				Integer bon_stock = null;
-				Integer bon_stock = 50;
-//				try {
-//					bon_stock = new Integer (req.getParameter("bon_stock").trim());
-//				} catch (NumberFormatException e) {
-//					bon_stock = null;
-//					errorMsgs.add("現有總庫存請填數字.");
-//				}
+				Integer bon_stock = null;
+				try {
+					bon_stock = new Integer (req.getParameter("bon_stock").trim());
+				} catch (NumberFormatException e) {
+					bon_stock = null;
+					errorMsgs.add("現有總庫存請填數字.");
+				}
 				
 //				圖片
 				byte[] bon_image = null;
-//				Part part = req.getPart("bon_image");
-//				InputStream in = part.getInputStream();
-//				if ( in.available() > 0 ) {
-//					bon_image = new byte[in.available()];
-//					in.read();
-//					in.close();
-//				} else {
-//					errorMsgs.add("請選擇圖片");
-//				}
+				Part part = req.getPart("bon_image");
+				InputStream in = part.getInputStream();
+				if ( in.available() > 0 ) {
+					bon_image = new byte[in.available()];
+					in.read();
+					in.close();
+				} else {
+					errorMsgs.add("請選擇圖片");
+				}
 				
-//				String pt_id = new String(req.getParameter("pt_id").trim());
-				String pt_id = "PT003";
+				String pt_id = new String(req.getParameter("pt_id").trim());
 
 				BMVO bmVO = new BMVO();
 				
