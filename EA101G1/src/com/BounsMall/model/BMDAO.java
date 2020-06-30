@@ -304,7 +304,7 @@ public class BMDAO implements BMDAO_interface {
 	}
 
 	@Override
-	public List<BMVO> getByPTId(String pt_id) {
+	public List<BMVO> getByPtId(String pt_id) {
 		List<BMVO> list = new ArrayList<BMVO>();
 		BMVO bmVO = null;
 		

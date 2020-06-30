@@ -89,7 +89,18 @@
 					</form>
 				</td>
 				<td>
-					
+					<form method="post" action="<%=request.getContextPath()%>/front-end/BounsMall/BounsMall.do" style="margin-bottom: 0px;">
+						<input type="hidden" name="bon_id" value="${bmVO.bon_id}">
+						<input type="hidden" name="action" value="getOne_For_Update">
+						<input type="submit" value="­×§ï">
+					</form>
+				</td>
+				<td>
+					<form method="post" action="<%=request.getContextPath()%>/front-end/BounsMall/BounsMall.do" style="margin-bottom: 0px;">
+						<input type="hidden" name="bon_id" value="${bmVO.bon_id}">
+						<input type="hidden" name="action" value="delete">
+						<input type="submit" value="§R°£">
+					</form>
 				</td>
 			</tr>
 		</c:forEach>

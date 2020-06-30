@@ -23,10 +23,10 @@ public class BMServlet extends HttpServlet {
 		if ("getAll".equals(action)) {
 			BMDAO dao = new BMDAO();
 			List<BMVO> list = dao.getAll();
+			String url = "/front-end/BounsMall/ListAll.jsp";
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list);
-			String url = "/front-end/BounsMall/ListAll.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			return;
@@ -124,48 +124,54 @@ public class BMServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsMall/ListAll.jsp";
+			String fail = "/back-end/BounsMall/addBM.jsp";
 			
 			try {
-				String bon_name = req.getParameter("bon_name");
-				if (bon_name == null || bon_name.trim().length() == 0) {
-					errorMsgs.add("商品名稱: 請勿空白");
-				}
+//				String bon_name = req.getParameter("bon_name");
+				String bon_name = "良值二代 皮卡丘配色 震動連發無線手把";
+//				if (bon_name == null || bon_name.trim().length() == 0) {
+//					errorMsgs.add("商品名稱: 請勿空白");
+//				}
 				
-				String bon_info = req.getParameter("bon_info").trim();
-				if (bon_info == null || bon_info.trim().length() == 0) {
-					errorMsgs.add("描述請勿空白");
-				}
+//				Integer bon_price = null;
+				Integer bon_price = 98;
+//				try {
+//					bon_price = new Integer (req.getParameter("bon_price").trim());
+//				} catch (NumberFormatException e) {
+//					bon_price = null;
+//					errorMsgs.add("價格請填數字.");
+//				}
 				
-				Integer bon_price = null;
-				try {
-					bon_price = new Integer (req.getParameter("bon_price").trim());
-				} catch (NumberFormatException e) {
-					bon_price = null;
-					errorMsgs.add("價格請填數字.");
-				}
-				
-				Integer bon_stock = null;
-				try {
-					bon_stock = new Integer (req.getParameter("bon_stock").trim());
-				} catch (NumberFormatException e) {
-					bon_stock = null;
-					errorMsgs.add("現有總庫存請填數字.");
-				}
+//				String bon_info = req.getParameter("bon_info").trim();
+				String bon_info = "提供保固六個月";
+//				if (bon_info == null || bon_info.trim().length() == 0) {
+//					errorMsgs.add("描述請勿空白");
+//				}
+
+//				Integer bon_stock = null;
+				Integer bon_stock = 50;
+//				try {
+//					bon_stock = new Integer (req.getParameter("bon_stock").trim());
+//				} catch (NumberFormatException e) {
+//					bon_stock = null;
+//					errorMsgs.add("現有總庫存請填數字.");
+//				}
 				
 //				圖片
-				String imurl = null;
-				BMDAO bmdao = new BMDAO();
 				byte[] bon_image = null;
-				try {
-					imurl = "";
-					bon_image = bmdao.getPictureByteArray(imurl);
-				} catch ( Exception e ) {
-					imurl = null;
-					bon_image = null;
-					System.out.println("Exception error. " + e.getMessage() );
-				}
+//				Part part = req.getPart("bon_image");
+//				InputStream in = part.getInputStream();
+//				if ( in.available() > 0 ) {
+//					bon_image = new byte[in.available()];
+//					in.read();
+//					in.close();
+//				} else {
+//					errorMsgs.add("請選擇圖片");
+//				}
 				
-				String pt_id = new String(req.getParameter("pt_id").trim());
+//				String pt_id = new String(req.getParameter("pt_id").trim());
+				String pt_id = "PT003";
 
 				BMVO bmVO = new BMVO();
 				
@@ -180,8 +186,7 @@ public class BMServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("bmVO", bmVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/BounsMall/addBM.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher(fail);
 					failureView.forward(req, res);
 					return;
 				}
@@ -189,18 +194,16 @@ public class BMServlet extends HttpServlet {
 				/***************************2.開始新增資料***************************************/
 				
 				BMService bmSvc = new BMService();
-				bmVO = bmSvc.addByPK(pt_id, bon_name, bon_price, bon_image, bon_info, bon_stock);
+				bmVO = bmSvc.addBM(pt_id, bon_name, bon_price, bon_image, bon_info, bon_stock);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/BounsMall/ListAll.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(success);
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/BounsMall/addBM.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
 				failureView.forward(req, res);
 			}
 		}
@@ -306,7 +309,7 @@ public class BMServlet extends HttpServlet {
 				try {
 					comm = new Double(req.getParameter("comm").trim());
 				} catch (NumberFormatException e) {
-					comm = 0.0;
+					comm = null;
 					errorMsgs.add("獎金請填數字.");
 				}
 

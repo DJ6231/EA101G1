@@ -315,7 +315,7 @@ public class BMJDBCDAO implements BMDAO_interface {
 	}
 
 	@Override
-	public List<BMVO> getByPTId(String pt_id) {
+	public List<BMVO> getByPtId(String pt_id) {
 		List<BMVO> list = new ArrayList<BMVO>();
 		BMVO bmVO = null;
 		
@@ -522,21 +522,21 @@ public class BMJDBCDAO implements BMDAO_interface {
 //			System.out.println("---------------");
 //		}
 		
-		List<BMVO> list3 = dao.getByBName("v");
-		for ( BMVO abm : list3 ) {
-			System.out.print(abm.getBon_id() + ",");
-			System.out.print(abm.getPt_id() + ",");
-			System.out.print(abm.getBon_name() + ",");
-			System.out.println(abm.getBon_price());
-			System.out.println(abm.getBon_image());
-			System.out.println(abm.getBon_info());
-			System.out.print(abm.getBon_exchange() + ",");
-			System.out.print(abm.getBon_stock() + ",");
-			System.out.print(abm.getBon_addDate() + ",");
-			System.out.print(abm.getBon_status());
-			System.out.println();
-			System.out.println("---------------");
-		}
+//		List<BMVO> list3 = dao.getByBName("v");
+//		for ( BMVO abm : list3 ) {
+//			System.out.print(abm.getBon_id() + ",");
+//			System.out.print(abm.getPt_id() + ",");
+//			System.out.print(abm.getBon_name() + ",");
+//			System.out.println(abm.getBon_price());
+//			System.out.println(abm.getBon_image());
+//			System.out.println(abm.getBon_info());
+//			System.out.print(abm.getBon_exchange() + ",");
+//			System.out.print(abm.getBon_stock() + ",");
+//			System.out.print(abm.getBon_addDate() + ",");
+//			System.out.print(abm.getBon_status());
+//			System.out.println();
+//			System.out.println("---------------");
+//		}
 		
 	}
 }

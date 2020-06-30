@@ -122,15 +122,20 @@
 		
 		<tr>
 			<td>紅利商品上架狀態：</td>
-<%-- 			<td><input type="text" name="bon_status" size="45" value=<%=bmVO.getBon_status()%>/></td> --%>
-			<td><input type="text" name="bon_status" size="45" value="${bmVO.bon_status}"/></td>
+			<td>
+				<select size="1" name="bon_status">
+					<option value=0 >上架
+					<option value=1 selected >下架
+				</select>
+			</td>
 		</tr>
 	</table>
+	<br>
+	<input type="hidden" name="action" value="update">
+	<input type="hidden" name="bon_id" value=${bmVO.bon_id}>
+	<input type="submit" value="送出修改">
 </form>
-<br>
-<input type="hidden" name="action" value="update">
-<input type="hidden" name="bon_id" value=${bmVO.bon_id}>
-<input type="submit" value="送出修改">
+
 </body>
 
 
@@ -139,11 +144,22 @@
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
-	
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 151px;   /* height:  151px; */
+  }
 </style>
 
 <script>
-	
+        $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+           theme: '',
+ 	       timepicker:false,
+ 	       step: 1,
+ 	       format:'Y-m-d',
+ 		   value: '<%=bmVO.getBon_addDate()%>', // value:   new Date(),
+        });
 </script>
-
 </html>

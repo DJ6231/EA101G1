@@ -116,5 +116,10 @@
 </table>
 <%@ include file="/back-end/page2.file" %>
 
+<!-- <form method="post" action=""> -->
+<!-- 	<input type="hidden" name="action" value="insert"> -->
+<!-- 	<input type="submit" value="新增商品"> -->
+<!-- </form> -->
+
 </body>
 </html>

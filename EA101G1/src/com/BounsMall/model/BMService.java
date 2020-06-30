@@ -10,7 +10,7 @@ public class BMService {
 		dao = new BMDAO();
 	}
 	
-	public BMVO addByPK( String pt_id, String bon_name, int bon_price, byte[] bon_image,
+	public BMVO addBM( String pt_id, String bon_name, int bon_price, byte[] bon_image,
 			String bon_info, int bon_stock ) {
 		
 		BMVO bmVO = new BMVO();
@@ -57,8 +57,8 @@ public class BMService {
 		return dao.getAll();
 	}
 	
-	public List<BMVO> getByPTId ( String pt_id ){
-		return dao.getByPTId(pt_id);
+	public List<BMVO> getByPtId ( String pt_id ){
+		return dao.getByPtId(pt_id);
 	}
 	
 	public List<BMVO> getByBonName ( String bon_name ) {

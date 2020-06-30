@@ -11,8 +11,8 @@ public class PtDAO implements com.productType.model.PtDAO_interface{
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "DANNY";
-	String passwd = "123456";
+	String userid = "TEST1";
+	String passwd = "TEST1";
 
 	private static final String INSERT = "INSERT INTO PRODUCT_TYPE(PT_ID,TYPENAME) VALUES(?,?)";
 	private static final String UPDATE = "UPDATE PRODUCT_TYPE SET TYPENAME=? WHERE PT_ID=?";
