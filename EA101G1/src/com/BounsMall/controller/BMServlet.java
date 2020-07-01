@@ -3,6 +3,7 @@ package com.BounsMall.controller;
 import java.io.*;
 import java.util.*;
 
+import javax.print.PrintService;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
@@ -238,7 +239,7 @@ public class BMServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			String success = "/back-end/BounsMall/ListAll.jsp" ;
 			String fail = "/back-end/BounsMall/updateBM.jsp" ;
-		
+			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String bon_id = new String(req.getParameter("bon_id").trim());
@@ -258,16 +259,13 @@ public class BMServlet extends HttpServlet {
 					errorMsgs.add("價格請勿空白");
 				}
 				
-				String imurl = null;
-				BMDAO bmdao = new BMDAO();
-				byte[] bon_image = null;
-				try {
-					imurl = req.getParameter("bon_image");
-					bon_image = bmdao.getPictureByteArray(imurl);
-				} catch ( Exception e ) {
-					imurl = null;
-					bon_image = null;
-					System.out.println("Exception error. " + e.getMessage() );
+				
+				byte[] bon_image = getPartByteArray(req);
+				if ( bon_image.length == 0 ) {
+					BMService bmSvc = new BMService();
+					BMVO bmvo = bmSvc.getByPK(bon_id);
+					byte[] imareg = bmvo.getBon_image();
+					bon_image = imareg;
 				}
 				
 				String bon_info = req.getParameter("bon_info");
@@ -307,16 +305,6 @@ public class BMServlet extends HttpServlet {
 					errorMsgs.add("請輸入上架狀態！");
 				}
 				
-				Double comm = null;
-				try {
-					comm = new Double(req.getParameter("comm").trim());
-				} catch (NumberFormatException e) {
-					comm = null;
-					errorMsgs.add("獎金請填數字.");
-				}
-
-				Integer deptno = new Integer(req.getParameter("deptno").trim());
-				
 				BMVO bmVO = new BMVO();
 				bmVO.setBon_id(bon_id);
 				bmVO.setPt_id(pt_id);
@@ -351,7 +339,7 @@ public class BMServlet extends HttpServlet {
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher(fail);
 				failureView.forward(req, res);
@@ -383,5 +371,17 @@ public class BMServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+	}
+	
+	public byte[] getPartByteArray(HttpServletRequest req) throws ServletException, IOException {
+		
+		Part part = req.getPart("bon_image"); // Servlet3.0 新增了 Part 介面，讓我們方便地進行檔案上傳處理
+		
+		java.io.InputStream in = part.getInputStream();
+		byte[] buf = new byte[in.available()];
+		in.read(buf);
+		in.close();
+		
+		return buf;
 	}
 }
