@@ -148,12 +148,18 @@ public class BMServlet extends HttpServlet {
 					errorMsgs.add("描述請勿空白");
 				}
 
-				Integer bon_stock = null;
-				try {
-					bon_stock = new Integer (req.getParameter("bon_stock").trim());
-				} catch (NumberFormatException e) {
-					bon_stock = null;
-					errorMsgs.add("現有總庫存請填數字.");
+				Integer bon_stock = 0;
+				String rstock = req.getParameter("bon_stock");
+				if ( rstock == null || rstock.trim().length() == 0 ) {
+					bon_stock = 0;
+					errorMsgs.add("現有庫存請勿空白.");
+				} else {
+					try {
+						bon_stock = new Integer (req.getParameter("bon_stock").trim());
+					} catch (NumberFormatException e) {
+						bon_stock = null;
+						errorMsgs.add("現有總庫存請填數字.");
+					}
 				}
 				
 //				圖片
@@ -162,7 +168,7 @@ public class BMServlet extends HttpServlet {
 				InputStream in = part.getInputStream();
 				if ( in.available() > 0 ) {
 					bon_image = new byte[in.available()];
-					in.read();
+					in.read(bon_image);
 					in.close();
 				} else {
 					errorMsgs.add("請選擇圖片");
@@ -189,17 +195,16 @@ public class BMServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				
 				BMService bmSvc = new BMService();
 				bmVO = bmSvc.addBM(pt_id, bon_name, bon_price, bon_image, bon_info, bon_stock);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				RequestDispatcher successView = req.getRequestDispatcher(success);
-				successView.forward(req, res);				
+				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				errorMsgs.add("資料新增失敗" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher(fail);
 				failureView.forward(req, res);
 			}

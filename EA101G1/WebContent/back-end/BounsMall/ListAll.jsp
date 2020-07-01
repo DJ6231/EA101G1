@@ -55,7 +55,7 @@
 
 <table id="table-1">
 	<tr><td>
-		<h3>所有紅利商品資料</h3>
+		<h3>所有紅利商品資料-/back-end/ListAll.jsp</h3>
 <!-- 		<h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4> -->
 	</td></tr>
 </table>
@@ -116,10 +116,10 @@
 </table>
 <%@ include file="/back-end/page2.file" %>
 
-<!-- <form method="post" action=""> -->
-<!-- 	<input type="hidden" name="action" value="insert"> -->
-<!-- 	<input type="submit" value="新增商品"> -->
-<!-- </form> -->
+<form method="post" action="<%=request.getContextPath()%>/back-end/BounsMall/addBM.jsp">
+	<input type="hidden" name="action" value="addBM">
+	<input type="submit" value="新增商品">
+</form>
 
 </body>
 </html>

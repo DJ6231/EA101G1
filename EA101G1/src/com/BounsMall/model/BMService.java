@@ -21,6 +21,7 @@ public class BMService {
 		bmVO.setBon_image(bon_image);
 		bmVO.setBon_info(bon_info);
 		bmVO.setBon_stock(bon_stock);
+		dao.insert(bmVO);
 		
 		return bmVO;
 	}
@@ -41,6 +42,7 @@ public class BMService {
 		bmVO.setBon_stock(bon_stock);
 		bmVO.setBon_addDate(bon_addDate);
 		bmVO.setBon_status(bon_status);
+		dao.update(bmVO);
 		
 		return bmVO;
 	}

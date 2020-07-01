@@ -54,7 +54,7 @@
 
 	<table id="table-1">
 		<tr><td>
-			<h3>新增紅利商品資料</h3>
+			<h3>新增紅利商品資料-/back-end/addBM.jsp</h3>
 			<h4>
 				<a href="ListAll.jsp">
 				<img src="<%=request.getContextPath()%>/back-end/images/back1.gif"
@@ -130,7 +130,7 @@
 					placeholder="請輸入紅利商品庫存量"/>
 				</td>
 			</tr>
-<!-- 			error -->
+			
 			<jsp:useBean id="ptSvc" scope="page" class="com.productType.model.PtService"/>
 			<tr>
 				<td>商品分類：</td>
@@ -143,7 +143,7 @@
 					</select>
 				</td>
 			</tr>
-<!-- 			/error -->
+			
 		</table>
 		<br>
 		<input type="hidden" name="action" value="insert">
@@ -152,33 +152,41 @@
 	
 	<script>
 		function init() {
+
 			var myFile = document.getElementById("myFile");
-			var preview = document.getElementById("preview");
-			
+			var preview = document.getElementById('preview');
+
 			myFile.addEventListener('change', function(e) {
+
 				var files = myFile.files;
-				
-				if ( files !== null && files.length > 0 ) {
+
+				if (files !== null && files.length > 0) {
+
 					var file = files[0];
-					
+
 					console.log(file.type);
-					if ( file.type.indexOf('image') > -1 ) {
+					if (file.type.indexOf('image') > -1) {
+
 						var reader = new FileReader();
-						
+
 						reader.addEventListener('load', function(e) {
+
 							var result = e.target.result;
+
 							var img = document.createElement('img');
-							
+
 							img.src = result;
 							preview.innerHTML = "";
 							preview.append(img);
 						});
-						reader.readAsDataURL(file);
+
+						reader.readAsDataURL(file); // ***** 
+
 					}
 				}
 			});
 		}
-		
+
 		window.onload = init;
 	</script>
 	
