@@ -51,7 +51,7 @@
 	
 	<table>
 		<ul>
-			<li><a href="ListAll.jsp">List</a> all BounsMall.</li>
+			<li><a href="<%=request.getContextPath()%>/back-end/BounsMall//ListAll.jsp">List</a> all BounsMall.</li>
 			
 			<li>
 				<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do">

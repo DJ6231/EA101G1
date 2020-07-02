@@ -159,34 +159,7 @@ public class BMServlet extends HttpServlet {
 			
 			try {
 				String str = req.getParameter("bon_id");
-				String strReg = "^B[0-9]{6}";
-				if ( str == null || ( str.trim()).length() == 0 ) {
-					errorMsgs.add("請輸入商品編號");
-				}
-
-				if ( !errorMsgs.isEmpty() ) {
-					RequestDispatcher failureView
-						= req.getRequestDispatcher(url);
-					failureView.forward(req, res);
-					return;
-				}
-				
-				String bon_id = "";
-				try {
-					if ( str.matches(strReg) )
-						bon_id = str;
-					else
-						throw new Exception();
-				} catch ( Exception e ) {
-					errorMsgs.add("商品編號格式不正確");
-				}
-
-				if ( !errorMsgs.isEmpty() ) {
-					RequestDispatcher failureView
-						= req.getRequestDispatcher(url);
-					failureView.forward(req, res);
-					return;
-				}
+				String bon_id = str;
 				
 				BMDAO dao = new BMDAO();
 				BMVO bmVO = dao.findByPrimaryKey(bon_id);

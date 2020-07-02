@@ -9,6 +9,8 @@
 	pageContext.setAttribute("list",list);
 %>
 
+<jsp:useBean id="ptSvc" scope="page" class="com.productType.model.PtService" />
+
 <html>
 <head>
 <title>全部紅利商品訊息</title>
@@ -54,13 +56,19 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-	<tr><td>
-		<h3>所有紅利商品資料 - /back-end/ListAll.jsp</h3>
-		<h4>
-			<a href="<%=request.getContextPath()%>/back-end/BounsMall/select_page.jsp">
-				<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
-		</h4>
-	</td></tr>
+	<tr>
+		<td>
+			<h3>所有紅利商品資料 - /back-end/ListAll.jsp</h3>
+<!-- 			<h4> -->
+<!-- 				<a href="select_page.jsp"> -->
+<!-- 					<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a> -->
+<!-- 			</h4> -->
+			<h4>
+				<a href="<%=request.getContextPath()%>/back-end/BounsMall/select_page.jsp">
+					<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+			</h4>
+		</td>
+	</tr>
 </table>
 
 <%-- 錯誤列表 --%>
@@ -76,7 +84,7 @@
 <table>
 	<tr>
 		<th>紅利商品編號</th>
-		<th>商品分類編號</th>
+		<th>商品分類</th>
 		<th>紅利商品名稱</th>
 		<th>所需紅利點數</th>
 		<th>紅利商品圖片</th>
@@ -91,7 +99,7 @@
 	<c:forEach var="bmVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr>
 			<td>${bmVO.bon_id}</td>
-			<td>${bmVO.pt_id}</td>
+			<td>${ptSvc.getOneProductType(bmVO.pt_id).typename}</td>
 			<td>${bmVO.bon_name}</td>
 			<td>${bmVO.bon_price}</td>
 			<td><img src="<%=request.getContextPath()%>/BounsMall/ImageServlet.do?bon_id=${bmVO.bon_id}" id="display"></td>
