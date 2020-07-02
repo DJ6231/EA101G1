@@ -8,4 +8,7 @@ public interface BODAO_interface {
 	public void delete(String ord_id);
 	public BOVO findByPrimaryKey(String ord_id);
 	public List<BOVO> getAll();
+	public List<BOVO> getByMem(String mem_id);
+	public List<BOVO> getByBon(String bon_id);
+	public List<BOVO> getByBs(String bs_id);
 }

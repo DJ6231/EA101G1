@@ -26,7 +26,7 @@ public class BMServlet extends HttpServlet {
 		if ("getAll".equals(action)) {
 			BMDAO dao = new BMDAO();
 			List<BMVO> list = dao.getAll();
-			String url = "/front-end/BounsMall/ListAll.jsp";
+			String url = "ListAll.jsp";
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("list", list);
@@ -36,38 +36,113 @@ public class BMServlet extends HttpServlet {
 		}
 		
 		if ("getByName".equals(action)) {
+			List<BMVO> list = new ArrayList<BMVO>();
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			String url = "/front-end/BounsMall/select_page.jsp";
-			String success = "/front-end/BounsMall/ListAll.jsp";
+			String success = "/back-end/BounsMall/ListByName.jsp";
+			String fail = "/back-end/BounsMall/select_page.jsp";
 			
 			try {
-				String bon_name = req.getParameter("bon_name");
-				if ( bon_name == null || bon_name.trim().length() == 0 ) {
-					errorMsgs.add("請輸入紅利商品名稱");
+				String reg = req.getParameter("bon_name");
+				if (reg == null || reg.trim().length() == 0) {
+					errorMsgs.add("商品名稱: 請勿空白");
 				}
 				
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher(url);
+				if ( !errorMsgs.isEmpty() ) {
+					RequestDispatcher failureView = req.getRequestDispatcher(fail);
 					failureView.forward(req, res);
 					return;
 				}
 				
+				String bon_name = reg;
 				BMService bmSvc = new BMService();
-				BMVO bmVO = (BMVO) bmSvc.getByBonName(bon_name);
+				list = bmSvc.getByBonName(bon_name);
+				
+				req.setAttribute("list", list);
+				req.setAttribute("bon_name", bon_name);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("getAll_ByPtId".equals(action)) {
+			List<BMVO> list = new ArrayList<BMVO>();
+			String success = "/back-end/BounsMall/ListByPtId.jsp";
+			String fail = "/back-end/BounsMall/select_page.jsp";
+			
+			try {
+				String pt_id = req.getParameter("pt_id");
+				BMService bmSvc = new BMService();
+				list = bmSvc.getByPtId(pt_id);
+				
+				req.setAttribute("list", list);
+				req.setAttribute("pt_id", pt_id);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("getOne_For_Display".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String url = "/back-end/BounsMall/select_page.jsp";
+			String success = "/back-end/BounsMall/ListOne.jsp";
+			
+			try {
+				String str = req.getParameter("bon_id");
+//				String strReg = "^B[0-9]{6}";
+//				if ( str == null || ( str.trim()).length() == 0 ) {
+//					errorMsgs.add("請輸入商品編號");
+//				}
+
+//				if ( !errorMsgs.isEmpty() ) {
+//					RequestDispatcher failureView
+//						= req.getRequestDispatcher(url);
+//					failureView.forward(req, res);
+//					return;
+//				}
+				
+				String bon_id = "";
+//				try {
+//					if ( str.matches(strReg) )
+						bon_id = str;
+//					else
+//						throw new Exception();
+//				} catch ( Exception e ) {
+//					errorMsgs.add("商品編號格式不正確");
+//				}
+
+//				if ( !errorMsgs.isEmpty() ) {
+//					RequestDispatcher failureView
+//						= req.getRequestDispatcher(url);
+//					failureView.forward(req, res);
+//					return;
+//				}
+				
+				BMDAO dao = new BMDAO();
+				BMVO bmVO = dao.findByPrimaryKey(bon_id);
 				if ( bmVO == null ) {
 					errorMsgs.add("查無資料");
 				}
 				
 				if ( !errorMsgs.isEmpty() ) {
-					RequestDispatcher failureView = req.getRequestDispatcher(url);
+					RequestDispatcher failureView
+						= req.getRequestDispatcher(url);
+					failureView.forward(req, res);
+					return;
 				}
 				
 				req.setAttribute("bmVO", bmVO);
-				RequestDispatcher successView = req.getRequestDispatcher(success);
+				RequestDispatcher successView
+					= req.getRequestDispatcher(success);
 				successView.forward(req, res);
-
+				
 			} catch ( Exception e ) {
 				errorMsgs.add( "無法取得資料：" + e.getMessage() );
 				RequestDispatcher failureView
@@ -76,17 +151,24 @@ public class BMServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getOne_For_Display".equals(action)) {
+		if ("getOne_For_Display_front".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			String url = "/front-end/BounsMall/select_page.jsp";
 			String success = "/front-end/BounsMall/ListOne.jsp";
 			
 			try {
-				String str = req.getParameter("BON_ID");
+				String str = req.getParameter("bon_id");
 				String strReg = "^B[0-9]{6}";
 				if ( str == null || ( str.trim()).length() == 0 ) {
 					errorMsgs.add("請輸入商品編號");
+				}
+
+				if ( !errorMsgs.isEmpty() ) {
+					RequestDispatcher failureView
+						= req.getRequestDispatcher(url);
+					failureView.forward(req, res);
+					return;
 				}
 				
 				String bon_id = "";
@@ -97,6 +179,13 @@ public class BMServlet extends HttpServlet {
 						throw new Exception();
 				} catch ( Exception e ) {
 					errorMsgs.add("商品編號格式不正確");
+				}
+
+				if ( !errorMsgs.isEmpty() ) {
+					RequestDispatcher failureView
+						= req.getRequestDispatcher(url);
+					failureView.forward(req, res);
+					return;
 				}
 				
 				BMDAO dao = new BMDAO();
@@ -116,6 +205,7 @@ public class BMServlet extends HttpServlet {
 				RequestDispatcher successView
 					= req.getRequestDispatcher(success);
 				successView.forward(req, res);
+				
 			} catch ( Exception e ) {
 				errorMsgs.add( "無法取得資料：" + e.getMessage() );
 				RequestDispatcher failureView

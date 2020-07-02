@@ -71,22 +71,16 @@ ${errorMsgs}<br>
 <!-- 		</form> -->
 <!-- 	</li> -->
 	
-	<li>
-		<form method="post" action="BounsMall.do">
-			<b>輸入紅利商品名稱：</b>
-			<input type="text" name="bon_name">
-			<input type="hidden" name="action" value="getByName">
-			<input type="submit" value="送出">
-		</form>
-	</li>
-	
-<!-- 	<li> -->
-<!-- 		<form method="post" action="BounsMall.do"> -->
-<!-- 			<b>選擇紅利商品種類：</b> -->
-<!-- 			<select></select> -->
-<!-- 		</form> -->
-<!-- 	</li> -->
-	
+		<li>
+			<form method="post" action="<%=request.getContextPath()%>/front-end/BounsMall/BounsMall.do">
+				<b>輸入關鍵字查詢：</b>
+				<input type="text" name="bon_name">
+				<input type="hidden" name="action" value="getByName">
+				<input type="submit" value="送出">
+			</form>
+		</li>
+		
+		
 </ul>
 
 </body>

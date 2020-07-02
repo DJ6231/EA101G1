@@ -40,11 +40,23 @@ public class BOService {
 		dao.delete(ord_id);
 	}
 	
-	public BOVO getOneBM ( String ord_id ) {
+	public BOVO getByPK ( String ord_id ) {
 		return dao.findByPrimaryKey(ord_id);
 	}
 	
 	public List<BOVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<BOVO> getByMem ( String mem_id ) {
+		return dao.getByMem(mem_id);
+	}
+	
+	public List<BOVO> getByBon ( String bon_id ) {
+		return dao.getByBon(bon_id);
+	}
+	
+	public List<BOVO> getByBs ( String bs_id ) {
+		return dao.getByBs(bs_id);
 	}
 }

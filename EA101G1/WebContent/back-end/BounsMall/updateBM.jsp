@@ -56,7 +56,8 @@
 				<h3>修改紅利商品訊息 - /back-end/updateBM.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/back-end/BounsMall/ListAll.jsp">
-						<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+<%-- 					<a href="return"> --%>
+						<img src="images/back1.gif" width="100" height="32" border="0">回上一頁</a>
 				</h4>
 			</td>
 	</table>
@@ -71,7 +72,7 @@
 	</c:if>
 
 	<form method="post"
-		action="<%=request.getContextPath()%>/back-end/BounsMall/BounsMall.do"
+		action="<%=request.getContextPath()%>/BounsMall/BounsMall.do"
 		name="form1" enctype="multipart/form-data">
 		<table>
 		
@@ -101,8 +102,8 @@
 					<div class="row">
 						<div id="preview">
 							<from method="post"
-								action="<%=request.getContextPath()%>/back-end/BounsMall/ImageServlet.do">
-								<img src="<%=request.getContextPath()%>/back-end/BounsMall/ImageServlet.do?bon_id=${bmVO.bon_id}">
+								action="<%=request.getContextPath()%>/BounsMall/ImageServlet.do">
+								<img src="<%=request.getContextPath()%>/BounsMall/ImageServlet.do?bon_id=${bmVO.bon_id}">
 							</from>
 						</div>
 					</div>

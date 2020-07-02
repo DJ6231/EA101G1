@@ -1,25 +1,24 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
 <%@ page import="com.BounsMall.model.*" %>
+<%@ page import="com.productType.model.*" %>
 
 <%
-	BMService bmSvc = new BMService();
-	List<BMVO> list = bmSvc.getAll();
-	pageContext.setAttribute("list",list);
+	BMVO bmVO = (BMVO) request.getAttribute("bmVO");
+	PtService ptSvc = new PtService();
+	
 %>
 
 <html>
 <head>
-<title>全部紅利商品訊息</title>
+<title>紅利商品訊息</title>
 
 <style>
 	table#table-1 {
 		background-color: #CCCCFF;
-		border: 2px solid black;
+		border:2px solid black;
 		text-align: center;
 	}
-	table#table-2 h4 {
+	table#table-1 h4 {
 		color: red;
 		display: block;
 		margin-bottom: 1px;
@@ -37,7 +36,7 @@
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-	table, th, td {
+	table, th, td{
 		border: 1px solid #CCCCFF;
 	}
 	th, td {
@@ -46,49 +45,39 @@
 	}
 	img#display {
 		width: 200px;
-		height: 200px;
 	}
 </style>
 
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
-	<tr><td>
-		<h3>所有紅利商品資料 - /back-end/ListAll.jsp</h3>
-		<h4>
-			<a href="<%=request.getContextPath()%>/back-end/BounsMall/select_page.jsp">
-				<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
-		</h4>
-	</td></tr>
-</table>
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>紅利商品資料 - /back-end/ListOne.jsp</h3>
+				<h4>
+					<a href="<%=request.getContextPath()%>/back-end/BounsMall/select_page.jsp">
+					<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
 
-<%-- 錯誤列表 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤：</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<table>
-	<tr>
-		<th>紅利商品編號</th>
-		<th>商品分類編號</th>
-		<th>紅利商品名稱</th>
-		<th>所需紅利點數</th>
-		<th>紅利商品圖片</th>
-		<th>紅利商品描述</th>
-		<th>已兌換數量</th>
-		<th>現有總庫存</th>
-		<th>上架日期</th>
-		<th>紅利商品上架狀態</th>
-		<th colspan="2">欲執行之動作</th>
-	</tr>
-	<%@ include file="/back-end/page1.file" %>
-	<c:forEach var="bmVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<table>
+		<tr>
+			<th>紅利商品編號</th>
+			<th>商品分類編號</th>
+			<th>紅利商品名稱</th>
+			<th>所需紅利點數</th>
+			<th>紅利商品圖片</th>
+			<th>紅利商品描述</th>
+			<th>已兌換數量</th>
+			<th>現有總庫存</th>
+			<th>上架日期</th>
+			<th>紅利商品上架狀態</th>
+			<th colspan="2">欲執行之動作</th>
+		</tr>
+	
 		<tr>
 			<td>${bmVO.bon_id}</td>
 			<td>${bmVO.pt_id}</td>
@@ -115,9 +104,7 @@
 				</form>
 			</td>
 		</tr>
-	</c:forEach>
-</table>
-<%@ include file="/back-end/page2.file" %>
+	</table>
 
 </body>
 </html>

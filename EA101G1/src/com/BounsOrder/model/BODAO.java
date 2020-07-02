@@ -22,10 +22,19 @@ public class BODAO implements BODAO_interface {
 					+ " VALUES ('BO'||LPAD(TO_CHAR(BOUNS_ORDER_SEQ.NEXTVAL),8,'0'), ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
 			"SELECT ORD_ID, MEM_ID, BON_ID, TO_CHAR(ORD_DATE,'yyyy-mm-dd') ORD_DATE, BS_ID"
-					+"FROM BOUNS_ORDER ORDER BY ORD_ID";
+					+ " FROM BOUNS_ORDER ORDER BY ORD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT ORD_ID, MEM_ID, BON_ID, TO_CHAR(ORD_DATE,'yyyy-mm-dd') ORD_DATE, BS_ID"
 					+ " FROM BOUNS_ORDER WHERE ORD_ID = ?";
+	private static final String GET_BY_MEM_ID =
+			"SELECT ORD_ID, MEM_ID, BON_ID, TO_CHAR(ORD_DATE,'yyyy-mm-dd') ORD_DATE, BS_ID"
+					+ " FROM BOUNS_ORDER WHERE MEM_ID = ?";
+	private static final String GET_BY_BON_ID =
+			"SELECT ORD_ID, MEM_ID, BON_ID, TO_CHAR(ORD_DATE,'yyyy-mm-dd') ORD_DATE, BS_ID"
+					+ " FROM BOUNS_ORDER WHERE BON_ID = ?";
+	private static final String GET_BY_BS_ID =
+			"SELECT ORD_ID, MEM_ID, BON_ID, TO_CHAR(ORD_DATE,'yyyy-mm-dd') ORD_DATE, BS_ID"
+					+ " FROM BOUNS_ORDER WHERE BS_ID = ?";
 	private static final String DELETE = 
 			"DELETE FROM BOUNS_ORDER WHERE ORD_ID=?";
 	private static final String UPDATE = 
@@ -243,4 +252,164 @@ public class BODAO implements BODAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<BOVO> getByMem(String mem_id) {
+		List<BOVO> list = new ArrayList<BOVO>();
+		BOVO boVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_MEM_ID);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next() ) {
+				boVO = new BOVO();
+				boVO.setOrd_id(rs.getString("ORD_ID"));
+				boVO.setMem_id(rs.getString("MEM_ID"));
+				boVO.setBon_id(rs.getString("BON_ID"));
+				boVO.setOrd_Date(rs.getDate("ORD_DATE"));
+				boVO.setBs_id(rs.getString("BS_ID"));
+				list.add(boVO);
+			}
+		} catch ( SQLException se ) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if ( rs != null ) {
+				try {
+					rs.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if ( pstmt != null ) {
+				try {
+					pstmt.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if ( con != null ) {
+				try {
+					con.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<BOVO> getByBon(String bon_id) {
+		List<BOVO> list = new ArrayList<BOVO>();
+		BOVO boVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_BON_ID);
+			pstmt.setString(1, bon_id);
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next() ) {
+				boVO = new BOVO();
+				boVO.setOrd_id(rs.getString("ORD_ID"));
+				boVO.setMem_id(rs.getString("MEM_ID"));
+				boVO.setBon_id(rs.getString("BON_ID"));
+				boVO.setOrd_Date(rs.getDate("ORD_DATE"));
+				boVO.setBs_id(rs.getString("BS_ID"));
+				list.add(boVO);
+			}
+		} catch ( SQLException se ) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if ( rs != null ) {
+				try {
+					rs.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if ( pstmt != null ) {
+				try {
+					pstmt.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if ( con != null ) {
+				try {
+					con.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<BOVO> getByBs(String bs_id) {
+		List<BOVO> list = new ArrayList<BOVO>();
+		BOVO boVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_BS_ID);
+			pstmt.setString(1, bs_id);
+			rs = pstmt.executeQuery();
+			
+			while ( rs.next() ) {
+				boVO = new BOVO();
+				boVO.setOrd_id(rs.getString("ORD_ID"));
+				boVO.setMem_id(rs.getString("MEM_ID"));
+				boVO.setBon_id(rs.getString("BON_ID"));
+				boVO.setOrd_Date(rs.getDate("ORD_DATE"));
+				boVO.setBs_id(rs.getString("BS_ID"));
+				list.add(boVO);
+			}
+		} catch ( SQLException se ) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if ( rs != null ) {
+				try {
+					rs.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if ( pstmt != null ) {
+				try {
+					pstmt.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if ( con != null ) {
+				try {
+					con.close();
+				} catch ( SQLException se ) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 }
