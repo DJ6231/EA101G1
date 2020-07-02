@@ -88,6 +88,26 @@ public class BMServlet extends HttpServlet {
 			}
 		}
 		
+		if ("getAll_ByPtId_front".equals(action)) {
+			List<BMVO> list = new ArrayList<BMVO>();
+			String success = "/front-end/BounsMall/ListByPtId.jsp";
+			String fail = "/front-end/BounsMall/select_page.jsp";
+			
+			try {
+				String pt_id = req.getParameter("pt_id");
+				BMService bmSvc = new BMService();
+				list = bmSvc.getByPtId(pt_id);
+				
+				req.setAttribute("list", list);
+				req.setAttribute("pt_id", pt_id);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
+		}
+		
 		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);

@@ -91,7 +91,7 @@
 		<th>紅利商品上架狀態</th>
 		<th>是否兌換？</th>
 	</tr>
-	<%@ include file="page1.file" %>
+	<%@ include file="/front-end/page1.file" %>
 	<c:forEach var="bmVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 <%-- 		<c:if test="${(bmVO.bon_status==0)}"> --%>
 			<tr>
@@ -115,7 +115,7 @@
 <%-- 		</c:if> --%>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+<%@ include file="/front-end/page2.file" %>
 
 </body>
 </html>

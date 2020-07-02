@@ -55,7 +55,7 @@
 			<td>
 				<h3>紅利商品＿商品種類查詢 - /back-end/ListByName.jsp</h3>
 			 	<h4>
-			 		<a href="<%=request.getContextPath()%>/back-end/BounsMall/select_page.jsp">
+			 		<a href="<%=request.getContextPath()%>/front-end/BounsMall/select_page.jsp">
 				 	<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 				 </h4>
 			</td>
@@ -86,7 +86,7 @@
 			<th>紅利商品上架狀態</th>
 			<th>是否兌換？</th>
 		</tr>
-		<%@ include file="/back-end/page1.file" %>
+		<%@ include file="/front-end/page1.file" %>
 		<c:forEach var="bmVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr>
 			<td>${bmVO.bon_id}</td>
@@ -109,6 +109,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="/back-end/page2.file" %>
+	<%@ include file="/front-end/page2.file" %>
 </body>
 </html>

@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="dao" scope="page" class="com.BounsMall.model.BMDAO"/>
+<jsp:useBean id="dao" scope="page" class="com.BounsMall.model.BMDAO" />
+<jsp:useBean id="ptSvc" scope="page" class="com.productType.model.PtService" />
 
 <html>
 <head>
@@ -78,6 +79,19 @@
 					</c:forEach>
 				</select>
 				<input type="hidden" name="action" value="getOne_For_Display_front">
+				<input type="submit" value="送出">
+			</form>
+		</li>
+		
+		<li>
+			<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do">
+				<b>選擇商品種類：</b>
+				<select size="1" name="pt_id">
+					<c:forEach var="ptVO" items="${ptSvc.all}">
+						<option value="${ptVO.pt_id}">${ptVO.typename}
+					</c:forEach>
+				</select>
+				<input type="hidden" name="action" value="getAll_ByPtId_front">
 				<input type="submit" value="送出">
 			</form>
 		</li>
