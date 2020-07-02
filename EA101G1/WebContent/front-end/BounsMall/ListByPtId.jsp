@@ -84,7 +84,7 @@
 			<th>現有總庫存</th>
 			<th>上架日期</th>
 			<th>紅利商品上架狀態</th>
-			<th colspan="2">欲執行之動作</th>
+			<th>是否兌換？</th>
 		</tr>
 		<%@ include file="/back-end/page1.file" %>
 		<c:forEach var="bmVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -101,17 +101,9 @@
 			<td>${(bmVO.bon_status==0)? "上架":"下架"}</td>
 			
 			<td>
-				<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do" style="margin-bottom: 0px;">
-					<input type="hidden" name="bon_id" value="${bmVO.bon_id}">
-					<input type="hidden" name="action" value="getOne_For_Update">
-					<input type="submit" value="修改">
-				</form>
-			</td>
-			<td>
-				<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do" style="margin-bottom: 0px;">
-					<input type="hidden" name="bon_id" value="${bmVO.bon_id}">
-					<input type="hidden" name="action" value="delete">
-					<input type="submit" value="刪除">
+				<form method="post" action="">
+					<input type="hidden" name="action" value="buy">
+					<input type="submit" value="我要兌換" >
 				</form>
 			</td>
 			</tr>

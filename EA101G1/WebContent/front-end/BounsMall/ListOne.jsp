@@ -90,11 +90,11 @@
 			<td>${bmVO.bon_addDate}</td>
 			<td>${(bmVO.bon_status==0)? "上架":"下架"}</td>
 			<td>
-					<form method="post" action="">
-						<input type="hidden" name="action" value="buy">
-						<input type="submit" value="我要兌換" >
-					</form>
-				</td>
+				<form method="post" action="">
+					<input type="hidden" name="action" value="buy">
+					<input type="submit" value="我要兌換" >
+				</form>
+			</td>
 		</tr>
 	</table>
 
