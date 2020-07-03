@@ -46,15 +46,15 @@
 		<url-pattern>/back-end/BounsMall/ImageServlet.do</url-pattern>
 	</servlet-mapping>
 	
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>BOServlet</servlet-name> -->
-<!-- 		<servlet-class>com.BounsOrder.controller.BOServlet</servlet-class> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>BOServlet</servlet-name> -->
-<!-- 		<url-pattern>/BounsMall/BounsMall.do</url-pattern> -->
-<!-- 		<url-pattern>/front-end/BounsMall/BounsMall.do</url-pattern> -->
-<!-- 		<url-pattern>/back-end/BounsMall/BounsMall.do</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	<servlet>
+		<servlet-name>BOServlet</servlet-name>
+		<servlet-class>com.BounsOrder.controller.BOServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BOServlet</servlet-name>
+		<url-pattern>/BounsOrder/BounsOrder.do</url-pattern>
+		<url-pattern>/front-end/BounsOrder/BounsOrder.do</url-pattern>
+		<url-pattern>/back-end/BounsOrder/BounsOrder.do</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

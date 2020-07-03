@@ -22,16 +22,7 @@ public class BOServlet extends HttpServlet {
 		throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-		if ( "getAll".equals(action) ) {
-			BODAO dao = new BODAO();
-			List<BOVO> list = dao.getAll();
-			String success = "";
-			
-			HttpSession session = req.getSession();
-			
-		}
-		
+				
 		if ( "getOne_For_Display".equals(action) ) {
 			
 		}

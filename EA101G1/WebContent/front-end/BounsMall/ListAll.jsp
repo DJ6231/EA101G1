@@ -79,7 +79,7 @@
 
 <table>
 	<tr>
-		<th>紅利商品編號</th>
+<!-- 		<th>紅利商品編號</th> -->
 		<th>商品分類</th>
 		<th>紅利商品名稱</th>
 		<th>所需紅利點數</th>
@@ -88,14 +88,14 @@
 		<th>已兌換數量</th>
 		<th>現有總庫存</th>
 		<th>上架日期</th>
-		<th>紅利商品上架狀態</th>
+<!-- 		<th>紅利商品上架狀態</th> -->
 		<th>是否兌換？</th>
 	</tr>
 	<%@ include file="/front-end/page1.file" %>
 	<c:forEach var="bmVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 <%-- 		<c:if test="${(bmVO.bon_status==0)}"> --%>
 			<tr>
-				<td>${bmVO.bon_id}</td>
+<%-- 				<td>${bmVO.bon_id}</td> --%>
 				<td>${ptSvc.getOneProductType(bmVO.pt_id).typename}</td>
 				<td>${bmVO.bon_name}</td>
 				<td>${bmVO.bon_price}</td>
@@ -104,7 +104,7 @@
 				<td>${bmVO.bon_exchange}</td>
 				<td>${bmVO.bon_stock}</td>
 				<td>${bmVO.bon_addDate}</td>
-				<td>${bmVO.bon_status}</td>
+<%-- 				<td>${bmVO.bon_status}</td> --%>
 				<td>
 					<form method="post" action="">
 						<input type="hidden" name="action" value="buy">

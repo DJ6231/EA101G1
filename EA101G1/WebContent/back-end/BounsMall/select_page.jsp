@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>紅利後台主頁面</title>
+<title>紅利後台主頁</title>
 <style>
   table#table-1 {
 	width: 450px;

@@ -57,18 +57,18 @@
 		</li>
 		<br>
 		
-		<li>
-			<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do">
-				<b>選擇紅利商品編號：</b>
-				<select size="1" name="bon_id">
-					<c:forEach var="bmVO" items="${dao.all}">
-						<option value="${bmVO.bon_id}">${bmVO.bon_id}
-					</c:forEach>
-				</select>
-				<input type="hidden" name="action" value="getOne_For_Display_front">
-				<input type="submit" value="送出">
-			</form>
-		</li>
+<!-- 		<li> -->
+<%-- 			<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do"> --%>
+<!-- 				<b>選擇紅利商品編號：</b> -->
+<!-- 				<select size="1" name="bon_id"> -->
+<%-- 					<c:forEach var="bmVO" items="${dao.all}"> --%>
+<%-- 						<option value="${bmVO.bon_id}">${bmVO.bon_id} --%>
+<%-- 					</c:forEach> --%>
+<!-- 				</select> -->
+<!-- 				<input type="hidden" name="action" value="getOne_For_Display_front"> -->
+<!-- 				<input type="submit" value="送出"> -->
+<!-- 			</form> -->
+<!-- 		</li> -->
 		
 		<li>
 			<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do">
@@ -96,14 +96,14 @@
 			</form>
 		</li>
 		
-<!-- 		<li> -->
-<%-- 			<form method="post" action="<%=request.getContextPath()%>/front-end/BounsMall/BounsMall.do"> --%>
-<!-- 				<b>輸入關鍵字查詢：</b> -->
-<!-- 				<input type="text" name="bon_name"> -->
-<!-- 				<input type="hidden" name="action" value="getByName"> -->
-<!-- 				<input type="submit" value="送出"> -->
-<!-- 			</form> -->
-<!-- 		</li> -->
+		<li>
+			<form method="post" action="<%=request.getContextPath()%>/front-end/BounsMall/BounsMall.do">
+				<b>輸入關鍵字查詢：</b>
+				<input type="text" name="bon_name">
+				<input type="hidden" name="action" value="getByName_front">
+				<input type="submit" value="送出">
+			</form>
+		</li>
 		
 		
 	</ul>

@@ -68,6 +68,39 @@ public class BMServlet extends HttpServlet {
 			}
 		}
 		
+		if ("getByName_front".equals(action)) {
+			List<BMVO> list = new ArrayList<BMVO>();
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/front-end/BounsMall/ListByName.jsp";
+			String fail = "/front-end/BounsMall/select_page.jsp";
+			
+			try {
+				String reg = req.getParameter("bon_name");
+				if (reg == null || reg.trim().length() == 0) {
+					errorMsgs.add("商品名稱: 請勿空白");
+				}
+				
+				if ( !errorMsgs.isEmpty() ) {
+					RequestDispatcher failureView = req.getRequestDispatcher(fail);
+					failureView.forward(req, res);
+					return;
+				}
+				
+				String bon_name = reg;
+				BMService bmSvc = new BMService();
+				list = bmSvc.getByBonName(bon_name);
+				
+				req.setAttribute("list", list);
+				req.setAttribute("bon_name", bon_name);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
+		}
+		
 		if ("getAll_ByPtId".equals(action)) {
 			List<BMVO> list = new ArrayList<BMVO>();
 			String success = "/back-end/BounsMall/ListByPtId.jsp";
