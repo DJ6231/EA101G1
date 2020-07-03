@@ -51,7 +51,7 @@
 	
 	<table>
 		<ul>
-			<li><a href="<%=request.getContextPath()%>/back-end/BounsMall//ListAll.jsp">List</a> all BounsMall.</li>
+			<li><a href="<%=request.getContextPath()%>/back-end/BounsMall/ListAll.jsp">List</a> all BounsMall.</li>
 			
 			<li>
 				<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do">
@@ -81,7 +81,7 @@
 			
 			<li>
 				<form method="post" action="<%=request.getContextPath()%>/BounsMall/BounsMall.do">
-					<b>輸入任意關鍵字：</b>
+					<b>輸入商品關鍵字：</b>
 					<input type="text" name="bon_name">
 					<input type="hidden" name="action" value="getByName">
 					<input type="submit" value="送出">
@@ -89,7 +89,7 @@
 			</li>
 		</ul>
 		
-		<form method="post" action="addBM.jsp">
+		<form method="post" action="<%=request.getContextPath()%>/back-end/BounsMall/addBM.jsp">
 			<input type="hidden" name="action" value="addBM">
 			<input type="submit" value="新增商品">
 		</form>

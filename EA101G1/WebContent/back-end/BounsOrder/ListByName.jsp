@@ -4,26 +4,19 @@
 <%@ page import="com.BounsOrder.model.*" %>
 
 <%
-	BOService boSvc = new BOService();
-	List<BOVO> list = boSvc.getAll();
-	pageContext.setAttribute("list", list);
+	List<BOVO> list = (java.util.List<BOVO>) request.getAttribute("list");
 %>
 
 <jsp:useBean id="bsSvc" scope="page" class="com.BounsState.model.BSService"/>
 <jsp:useBean id="bmSvc" scope="page" class="com.BounsMall.model.BMService"/>
 
-<!DOCTYPE html>
 <html>
 <head>
-	<title>全部訂單查詢</title>
+<title>紅利訂單_商品名稱查詢</title>
 	<style>
 		table#table-1 {
-			width: 450px;
 			background-color: #CCCCFF;
-			margin-top: 5px;
-			margin-bottom: 10px;
-			border: 3px ridge Gray;
-			height: 80px;
+			border: 2px solid black;
 			text-align: center;
 		}
 		table#table-1 h4 {
@@ -53,22 +46,24 @@
 		}
 	</style>
 </head>
-<body bgcolor='white'>
+
+<body bgcolor="white">
+	
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>全部訂單查詢 - /back-end/ListAll.jsp</h3>
-				<h4>
-					<a href="<%=request.getContextPath()%>/back-end/BounsOrder/select_page.jsp">
-						<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
-				</h4>
+				<h3>紅利訂單_商品名稱查詢 - /back-end/ListByName.jsp</h3>
+			 	<h4>
+			 		<a href="<%=request.getContextPath()%>/back-end/BounsOrder/select_page.jsp">
+				 	<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
+				 </h4>
 			</td>
 		</tr>
 	</table>
-	
-<!-- 	錯誤列表 -->
-	<c:if test="">
-		<font style="color:red">請修正以下錯誤：</font>
+
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color:red">請修正以下錯誤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color:red">${message}</li>

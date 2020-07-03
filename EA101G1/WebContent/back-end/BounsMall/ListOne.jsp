@@ -62,7 +62,7 @@
 			</td>
 		</tr>
 	</table>
-
+	
 	<table>
 		<tr>
 			<th>紅利商品編號</th>

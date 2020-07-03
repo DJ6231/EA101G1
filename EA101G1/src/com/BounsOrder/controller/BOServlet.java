@@ -1,18 +1,16 @@
 package com.BounsOrder.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-import com.BounsOrder.model.BODAO;
-import com.BounsOrder.model.BOVO;
+import com.BounsOrder.model.*;
 
 public class BOServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	public void doGet (HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {
 		doPost(req, res);
@@ -22,9 +20,63 @@ public class BOServlet extends HttpServlet {
 		throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-				
-		if ( "getOne_For_Display".equals(action) ) {
+		
+		System.out.print("BOServlet: ");
+		
+		if ( "getOneForDisplay".equals(action) ) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/ListOne.jsp";
+			String fail = "/back-end/BounsOrder/select_page.jsp";
 			
+			try {
+				String ord_id = req.getParameter("ord_id");
+				
+				BODAO dao = new BODAO();
+				BOVO boVO = dao.findByPrimaryKey(ord_id);
+				if( boVO == null ) {
+					errorMsgs.add( "查無資料" );
+				}
+				
+				req.setAttribute("boVO", boVO);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				errorMsgs.add( "無法取得資料" + e.getMessage() );
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ( "getAllByName".equals(action) ) {
+			List<BOVO> list = new ArrayList<BOVO>();
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/ListByName.jsp";
+			String fail = "/back-end/BounsOrder/select_page.jsp";
+			
+			try {
+				String bon_id = req.getParameter("bon_id");
+				
+				BOService boSvc = new BOService();
+				list = boSvc.getByBon(bon_id);
+				
+				req.setAttribute("list", list);
+				req.setAttribute("bon_id", bon_id);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ( "getAllByMember".equals(action) ) {
+			List<BOVO> list = new ArrayList<BOVO>();
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/ListByMember.jsp";
+			String fail = "/back-end/BounsOrder/select_page.jsp";
 		}
 		
 		if ( "getOne_For_Update".equals(action) ) {
@@ -42,5 +94,7 @@ public class BOServlet extends HttpServlet {
 		if ( "delete".equals(action) ) {
 			
 		}
+		
+		System.out.println();
 	}
 }

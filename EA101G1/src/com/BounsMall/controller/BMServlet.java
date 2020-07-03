@@ -23,18 +23,6 @@ public class BMServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if ("getAll".equals(action)) {
-			BMDAO dao = new BMDAO();
-			List<BMVO> list = dao.getAll();
-			String url = "ListAll.jsp";
-			
-			HttpSession session = req.getSession();
-			session.setAttribute("list", list);
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
-			return;
-		}
-		
 		if ("getByName".equals(action)) {
 			List<BMVO> list = new ArrayList<BMVO>();
 			List<String> errorMsgs = new LinkedList<String>();
