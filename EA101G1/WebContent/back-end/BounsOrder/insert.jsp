@@ -75,7 +75,7 @@
 		</ul>
 	</c:if>
 	
-	<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" name="form1" >
+	<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" >
 		<table>
 			<tr>
 				<td>¿ï¾Ü·|­û¡G</td>

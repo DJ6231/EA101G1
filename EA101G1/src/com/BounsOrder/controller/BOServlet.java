@@ -95,11 +95,58 @@ public class BOServlet extends HttpServlet {
 		}
 		
 		if ( "getOne_For_Update".equals(action) ) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/updateBO.jsp";
+			String fail = "/back-end/BounsOrder/ListAll.jsp";
 			
+			try {
+				String ord_id = new String(req.getParameter("ord_id"));
+				
+				BOService boSvc = new BOService();
+				BOVO boVO = boSvc.getByPK(ord_id);
+				
+				req.setAttribute("ord_id", ord_id);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				errorMsgs.add( "無法取得要修改的資料" + e.getMessage() );
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
 		}
 		
 		if ( "update".equals(action) ) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/ListAll.jsp";
+			String fail = "/back-end/BounsOrder/updateBO.jsp";
 			
+			try {
+				String ord_id = new String (req.getParameter("ord_id"));
+				String mem_id = new String (req.getParameter("mem_id"));
+				String bon_id = new String (req.getParameter("bon_id"));
+				java.sql.Date ord_Date = java.sql.Date.valueOf(req.getParameter("ord_Date").trim());
+				String bs_id = new String (req.getParameter("bs_id"));
+				
+				BOVO boVO = new BOVO();
+				boVO.setOrd_id(ord_id);
+				boVO.setMem_id(mem_id);
+				boVO.setBon_id(bon_id);
+				boVO.setOrd_Date(ord_Date);
+				boVO.setBs_id(bs_id);
+				
+				BOService boSvc = new BOService();
+				boVO = boSvc.updateBO(ord_id, mem_id, bon_id, ord_Date, bs_id);
+				
+				req.setAttribute("boVO", boVO);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				errorMsgs.add( "資料修改失敗：" + e.getMessage() );
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
 		}
 		
 		if ( "insert".equals(action) ) {
@@ -109,7 +156,26 @@ public class BOServlet extends HttpServlet {
 			String fail = "/back-end/BounsOrder/insert.jsp";
 			
 			try {
+				String mem_id = new String(req.getParameter("mem_id"));
+				String bon_id = new String(req.getParameter("bon_id"));
 				
+				BOVO boVO = new BOVO();
+				
+				boVO.setMem_id(mem_id);
+				boVO.setBon_id(bon_id);
+				
+				if ( !errorMsgs.isEmpty() ) {
+					req.setAttribute("boVO", boVO);
+					RequestDispatcher failureView = req.getRequestDispatcher(fail);
+					failureView.forward(req, res);
+					return;
+				}
+				
+				BOService boSvc = new BOService();
+				boVO = boSvc.addBO(mem_id, bon_id);
+				
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
 			} catch ( Exception e ) {
 				errorMsgs.add( "新增資料失敗" + e.getMessage() );
 				RequestDispatcher failureView = req.getRequestDispatcher(fail);
@@ -118,7 +184,24 @@ public class BOServlet extends HttpServlet {
 		}
 		
 		if ( "delete".equals(action) ) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/ListAll.jsp";
+			String fail = "/back-end/BounsOrder/ListAll.jsp";
 			
+			try {
+				String ord_id = req.getParameter("ord_id");
+				
+				BOService boSvc = new BOService();
+				boSvc.deleteBO(ord_id);
+				
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				errorMsgs.add( "資料刪除失敗" +e.getMessage() );
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
 		}
 		
 		System.out.println();

@@ -95,7 +95,7 @@
 			</li>
 		</ul>
 		
-		<form method="post" action="<%=request.getContextPath()%>/back-end/BounsOrder/addBO.jsp">
+		<form method="post" action="<%=request.getContextPath()%>/back-end/BounsOrder/insert.jsp">
 			<input type="hidden" name="action" value="insert">
 			<input type="submit" value="·s¼W­q³æ" >
 		</form>
