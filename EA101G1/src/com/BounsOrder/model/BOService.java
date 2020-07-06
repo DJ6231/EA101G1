@@ -10,15 +10,12 @@ public class BOService {
 		dao = new BODAO();
 	}
 	
-	public BOVO addBO ( String ord_id, String mem_id, String bon_id, java.sql.Date ord_Date,
-			String bs_id ) {
+	public BOVO addBO ( String mem_id, String bon_id ) {
 		BOVO boVO = new BOVO();
 		
-		boVO.setOrd_id(ord_id);
 		boVO.setMem_id(mem_id);
 		boVO.setBon_id(bon_id);
-		boVO.setOrd_Date(ord_Date);
-		boVO.setBs_id(bs_id);
+		dao.insert(boVO);
 		
 		return boVO;
 	}
@@ -32,6 +29,7 @@ public class BOService {
 		boVO.setBon_id(bon_id);
 		boVO.setOrd_Date(ord_Date);
 		boVO.setBs_id(bs_id);
+		dao.update(boVO);
 		
 		return boVO;
 	}

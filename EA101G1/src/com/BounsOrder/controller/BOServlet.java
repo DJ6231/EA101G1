@@ -77,6 +77,21 @@ public class BOServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			String success = "/back-end/BounsOrder/ListByMember.jsp";
 			String fail = "/back-end/BounsOrder/select_page.jsp";
+			
+			try {
+				String mem_id = req.getParameter("mem_id");
+				
+				BOService boSvc = new BOService();
+				list = boSvc.getByMem(mem_id);
+				
+				req.setAttribute("list", list);
+				req.setAttribute("mem_id", mem_id);
+				RequestDispatcher successView = req.getRequestDispatcher(success);
+				successView.forward(req, res);
+			} catch ( Exception e ) {
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
 		}
 		
 		if ( "getOne_For_Update".equals(action) ) {
@@ -88,7 +103,18 @@ public class BOServlet extends HttpServlet {
 		}
 		
 		if ( "insert".equals(action) ) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String success = "/back-end/BounsOrder/ListAll.jsp";
+			String fail = "/back-end/BounsOrder/insert.jsp";
 			
+			try {
+				
+			} catch ( Exception e ) {
+				errorMsgs.add( "新增資料失敗" + e.getMessage() );
+				RequestDispatcher failureView = req.getRequestDispatcher(fail);
+				failureView.forward(req, res);
+			}
 		}
 		
 		if ( "delete".equals(action) ) {

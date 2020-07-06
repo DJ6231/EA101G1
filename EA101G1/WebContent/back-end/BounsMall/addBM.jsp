@@ -147,7 +147,7 @@
 		</table>
 		<br>
 		<input type="hidden" name="action" value="insert">
-		<input type="submit" value="送出新增">
+		<input type="submit" value="送出新增" >
 	</form>
 	
 	<script>

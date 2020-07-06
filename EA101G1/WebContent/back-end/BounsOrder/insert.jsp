@@ -1,19 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
 <%@ page import="com.BounsOrder.model.*" %>
 
 <%
-	List<BOVO> list = (List<BOVO>) request.getAttribute("list");
+	BOVO boVO = (BOVO) request.getAttribute("boVO");
 %>
 
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 <jsp:useBean id="bmSvc" scope="page" class="com.BounsMall.model.BMService" />
-<jsp:useBean id="bsSvc" scope="page" class="com.BounsState.model.BSService"/>
 
-<!DOCTYPE html>
 <html>
 <head>
-	<title>會員紅利訂單查詢</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>新增紅利訂單</title>
+
+	<title>全部訂單查詢</title>
 	<style>
 		table#table-1 {
 			width: 450px;
@@ -55,7 +56,7 @@
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>會員紅利訂單查詢 - /back-end/ListAll.jsp</h3>
+				<h3>全部訂單查詢 - /back-end/ListAll.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/back-end/BounsOrder/select_page.jsp">
 						<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
@@ -74,42 +75,37 @@
 		</ul>
 	</c:if>
 	
-	<table>
-		<tr>
-			<th>訂單編號</th>
-			<th>會員編號</th>
-			<th>紅利商品名稱</th>
-			<th>下訂日期</th>
-			<th>訂單狀態</th>
-			<th colspan="2">執行動作</th>
-		</tr>
-		
-		<%@ include file="/back-end/page1.file" %>
-		<c:forEach var="boVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" name="form1" >
+		<table>
 			<tr>
-				<td>${boVO.ord_id}</td>
-				<td>${boVO.mem_id}</td>
-				<td>${bmSvc.getByPK(boVO.bon_id).bon_name}</td>
-				<td>${boVO.ord_Date}</td>
-				<td>${bsSvc.getOneBS(boVO.bs_id).bs_stat}</td>
+				<td>選擇會員：</td>
 				<td>
-					<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" style="margin-bottom: 0px;">
-						<input type="hidden" name="ord_id" value="${boVO.ord_id}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-						<input type="submit" value="修改" >
-					</form>
-				</td>
-				<td>
-					<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" style="margin-bottom: 0px;">
-						<input type="hidden" name="ord_id" value="${boVO.ord_id}">
-						<input type="hidden" name="action" value="delete">
-						<input type="submit" value="刪除" >
-					</form>
+					<select size="1" name="mem_id">
+						<c:forEach var="memVO" items="${memSvc.all}" >
+							<option value="${memVO.mem_id}"
+								${(boVO.mem_id==memVO.mem_id)? 'select':'' } >${memVO.mem_name}
+						</c:forEach>
+					</select>
 				</td>
 			</tr>
-		</c:forEach>
-	</table>
-	<%@ include file="/back-end/page2.file" %>
+			
+			<tr>
+				<td>選擇商品：</td>
+				<td>
+					<select size="1" name="bon_id">
+						<c:forEach var="bmVO" items="${bmSvc.all}">
+							<option value="${bmVO.bon_id}"
+								${(boVO.bon_id==bmVO.bon_id)? 'select':''} >${bmVO.bon_name}
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			
+		</table>
+		<br>
+		<input type="hidden" name="action" value="insert">
+		<input type="submit" value="送出新增" >
+	</form>
 	
 </body>
 </html>
