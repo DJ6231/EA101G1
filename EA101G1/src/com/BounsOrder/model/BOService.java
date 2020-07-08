@@ -15,7 +15,12 @@ public class BOService {
 		
 		boVO.setMem_id(mem_id);
 		boVO.setBon_id(bon_id);
+
+		System.out.print( "insert BOVO2" );
+		
 		dao.insert(boVO);
+
+		System.out.print( "insert BOVO3" );
 		
 		return boVO;
 	}

@@ -8,7 +8,7 @@
 
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 <jsp:useBean id="bmSvc" scope="page" class="com.BounsMall.model.BMService" />
-<jsp:useBean id="brSvc" scope="page" class="com.BounsState.model.BSService" />
+<jsp:useBean id="bsSvc" scope="page" class="com.BounsState.model.BSService" />
 
 <html>
 <head>
@@ -74,41 +74,43 @@
 	</c:if>
 	
 	<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" >
-		<tr>
-			<td>會員：</td>
-			<td>
-				<select size="1" name="mem_id" >
-					<c:forEach var="memVO" items="${memSvc.all}">
-						<option value="${memVO.mem_id}"
-							${(boVO.mem_id==memVO.mem_id)? 'select':''} >${memVO.mem_name}
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>紅利商品：</td>
-			<td>
-				<select size="1" name="bon_id" >
-					<c:forEach var="bmVO" items="${bmSvc.all}">
-						<option value="${bmVO.bon_id}"
-							${(boVO.bon_id==bmVO.bon_id)? 'select':'' }>${bmVO.bon_name}
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>訂單狀態：</td>
-			<td>
-				<select size="1" name="bs_id" >
-					<c:forEach var="bsVO" items="${bsSvc.all}">
-						<option value="${bsVO.bs_id}"
-							${(boVO.bs_id==bsVO.bs_id)? 'select':'' }" >${bsVO.bs_stat}
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
+		<table>
+			<tr>
+				<td>會員：</td>
+				<td>
+					<select size="1" name="mem_id" >
+						<c:forEach var="memVO" items="${memSvc.all}">
+							<option value="${memVO.mem_id}"
+								${(boVO.mem_id==memVO.mem_id)? 'select':''} >${memVO.mem_name}
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>紅利商品：</td>
+				<td>
+					<select size="1" name="bon_id" >
+						<c:forEach var="bmVO" items="${bmSvc.all}">
+							<option value="${bmVO.bon_id}"
+								${(boVO.bon_id==bmVO.bon_id)? 'select':'' }>${bmVO.bon_name}
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>訂單狀態：</td>
+				<td>
+					<select size="1" name="bs_id" >
+						<c:forEach var="bsVO" items="${bsSvc.all}">
+							<option value="${bsVO.bs_id}"
+								${(boVO.bs_id==bsVO.bs_id)? 'select':'' }" >${bsVO.bs_stat}
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+		</table>
 		<br>
 		<input type="hidden" name="action" value="update" >
 		<input type="hidden" name="ord_id" value="<%=boVO.getOrd_id()%>" >

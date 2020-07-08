@@ -37,8 +37,8 @@ public class FBServlet extends HttpServlet {
 		if ( "delete".equals(action) ) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			String success = "/back-end/FavouriteBouns/ListAll.jsp";
-			String fail = "/back-end/FavouriteBouns/ListAll.jsp";
+			String success = "/back-end/FavoriteBouns/ListAll.jsp";
+			String fail = "/back-end/FavoriteBouns/ListAll.jsp";
 
 			try {
 				String mem_id = req.getParameter("mem_id");

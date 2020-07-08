@@ -14,7 +14,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>穝糤璹虫</title>
 
-	<title>场璹虫琩高</title>
 	<style>
 		table#table-1 {
 			width: 450px;
@@ -56,7 +55,7 @@
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>场璹虫琩高 - /back-end/ListAll.jsp</h3>
+				<h3>穝糤璹虫 - /back-end/insert.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/back-end/BounsOrder/select_page.jsp">
 						<img src="images/back1.gif" width="100" height="32" border="0"></a>
