@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 import com.BounsOrder.model.*;
 
 public class BOServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	public void doGet (HttpServletRequest req, HttpServletResponse res)
 		throws ServletException, IOException {

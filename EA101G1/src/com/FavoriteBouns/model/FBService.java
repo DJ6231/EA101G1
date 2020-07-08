@@ -1,4 +1,4 @@
-package com.FavouriteBouns.model;
+package com.FavoriteBouns.model;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ public class FBService {
 		
 		fbVO.setMem_id(mem_id);
 		fbVO.setBon_id(bon_id);
+		dao.insert(fbVO);
 		
 		return fbVO;
 	}

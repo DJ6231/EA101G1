@@ -1,4 +1,4 @@
-package com.FavouriteBouns.model;
+package com.FavoriteBouns.model;
 
 import java.util.List;
 

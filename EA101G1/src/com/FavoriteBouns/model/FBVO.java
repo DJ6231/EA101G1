@@ -1,4 +1,4 @@
-package com.FavouriteBouns.model;
+package com.FavoriteBouns.model;
 
 public class FBVO implements java.io.Serializable {
 	private String mem_id;
