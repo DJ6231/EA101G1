@@ -287,6 +287,7 @@ public class FBJDBCDAO implements FBDAO_interface {
 			System.out.println(afb.getBon_id());
 			System.out.println("----------------");
 		}
+		
+		
 	}
-
 }

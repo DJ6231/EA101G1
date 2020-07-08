@@ -7,8 +7,8 @@
 	List<FBVO> list = (List<FBVO>) request.getAttribute("list");
 %>
 
+<jsp:useBean id="bmSvc" scope="page" class="com.BounsMall.model.BMService"/>
 
-<!DOCTYPE html>
 <html>
 <head>
 	<title>會員紅利最愛查詢</title>
@@ -80,12 +80,12 @@
 		</tr>
 		
 		<%@ include file="/back-end/page1.file" %>
-		<c:forEach var="boVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<c:forEach var="fbVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			<tr>
 				<td>${fbVO.mem_id}</td>
-				<td>${fbVO.bon_id}</td>
+				<td>${bmSvc.getByPK(fbVO.bon_id).bon_name}</td>
 				<td>
-					<form method="post" action="<%=request.getContextPath()%>/FavoriteBouns/FBS.do" style="margin-bottom: 0px;">
+					<form method="post" action="<%=request.getContextPath()%>/FavoriteBouns/FBService.do" style="margin-bottom: 0px;">
 						<input type="hidden" name="mem_id" value="${fbVO.mem_id}">
 						<input type="hidden" name="bon_id" value="${fbVO.bon_id}">
 						<input type="hidden" name="action" value="delete">

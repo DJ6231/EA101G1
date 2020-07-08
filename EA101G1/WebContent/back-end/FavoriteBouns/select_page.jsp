@@ -3,6 +3,7 @@
 
 <jsp:useBean id="fbSvc" scope="page" class="com.FavoriteBouns.model.FBService" />
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
+<jsp:useBean id="bmSvc" scope="page" class="com.BounsMall.model.BMService" />
 
 <html>
 <head>
@@ -55,12 +56,11 @@
 			<li><a href="<%=request.getContextPath()%>/back-end/FavoriteBouns/ListAll.jsp">List</a> all BounsOrder.</li>
 			
 			<li>
-<%-- 				<form method="post" action="<%=request.getContextPath()%>/FavoriteBouns/FBS.do"> --%>
 				<form method="post" action="<%=request.getContextPath()%>/FavoriteBouns/FBServlet.do">
-					<b>選擇會員名稱：</b>
+					<b>選擇會員：</b>
 					<select size="1" name="mem_id">
-						<c:forEach var="fbVO" items="${fbSvc.all}">
-							<option value="${fbVO.mem_id}">${fbVO.mem_id}
+						<c:forEach var="memVO" items="${memSvc.all}">
+							<option value="${memVO.mem_id}">${memVO.mem_id}
 						</c:forEach>
 					</select>
 					<input type="hidden" name="action" value="getAllByMember">
@@ -68,10 +68,30 @@
 				</form>
 			</li>
 			
-<%-- 		<form method="post" action="<%=request.getContextPath()%>"> --%>
-<!-- 			<input type="hidden" name="action" value="insert"> -->
-<!-- 			<input type="submit" value="新增訂單" > -->
-<!-- 		</form> -->
+			<li>
+				<form method="post" action="<%=request.getContextPath()%>/FavoriteBouns/FBServlet.do">
+					<b>選擇會員：</b>
+					<select size="1" name="mem_id">
+						<c:forEach var="memVO" items="${memSvc.all}">
+							<option value="${memVO.mem_id}">${memVO.mem_id}
+						</c:forEach>
+					</select>
+					<br>
+					<b>選擇商品：</b>
+					<select size="1" name="bon_id">
+						<c:forEach var="bmVO" items="${bmSvc.all}">
+							<option value="${bmVO.bon_id}">${bmVO.bon_name}
+						</c:forEach>
+					</select>
+					<input type="hidden" name="action" value="getOneForDisplay">
+					<input type="submit" value="送出" >
+				</form>
+			</li>
+			
+		<form method="post" action="<%=request.getContextPath()%>/back-end/FavoriteBouns/insert.jsp">
+			<input type="hidden" name="action" value="insert">
+			<input type="submit" value="新增最愛" >
+		</form>
 	</table>
 </body>
 </html>

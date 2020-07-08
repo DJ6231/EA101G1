@@ -20,8 +20,6 @@ public class BOServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		System.out.print("BOServlet: ");
-		
 		if ( "getOneForDisplay".equals(action) ) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -208,7 +206,5 @@ public class BOServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		System.out.println();
 	}
 }

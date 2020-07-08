@@ -58,7 +58,7 @@
 			<td>
 				<h3>全部訂單查詢 - /back-end/ListAll.jsp</h3>
 				<h4>
-					<a href="<%=request.getContextPath()%>/back-end/BounsOrder/select_page.jsp">
+					<a href="<%=request.getContextPath()%>/back-end/FavoriteBouns/select_page.jsp">
 						<img src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>
@@ -75,7 +75,7 @@
 		</ul>
 	</c:if>
 	
-	<form method="post" action="<%=request.getContextPath()%>/BounsOrder/BounsOrder.do" >
+	<form method="post" action="<%=request.getContextPath()%>/FavoriteBouns/FBServlet.do" >
 		<table>
 			<tr>
 				<td>選擇會員：</td>
@@ -83,7 +83,7 @@
 					<select size="1" name="mem_id">
 						<c:forEach var="memVO" items="${memSvc.all}" >
 							<option value="${memVO.mem_id}"
-								${(boVO.mem_id==memVO.mem_id)? 'select':'' } >${memVO.mem_name}
+								${(boVO.mem_id==memVO.mem_id)? 'select':'' } >${memVO.mem_id}
 						</c:forEach>
 					</select>
 				</td>
