@@ -19,7 +19,7 @@ public class BODAO implements BODAO_interface {
 	}
 	private static final String INSERT_STMT = 
 			"INSERT INTO BOUNS_ORDER ( ORD_ID, MEM_ID, BON_ID, BS_ID )"
-					+ " VALUES ('BO'||LPAD(TO_CHAR(BOUNS_ORDER_SEQ.NEXTVAL),8,'0'), ?, ?, BS001)";
+					+ " VALUES ('BO'||LPAD(TO_CHAR(BOUNS_ORDER_SEQ.NEXTVAL),8,'0'), ?, ?, 'BS001')";
 	private static final String GET_ALL_STMT = 
 			"SELECT ORD_ID, MEM_ID, BON_ID, TO_CHAR(ORD_DATE,'yyyy-mm-dd') ORD_DATE, BS_ID"
 					+ " FROM BOUNS_ORDER ORDER BY ORD_ID";

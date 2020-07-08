@@ -176,12 +176,8 @@ public class BOServlet extends HttpServlet {
 					return;
 				}
 
-				System.out.print( "insert C " );
-				
 				BOService boSvc = new BOService();
 				boVO = boSvc.addBO(mem_id, bon_id);
-				
-				System.out.print( "insert D " );
 				
 				RequestDispatcher successView = req.getRequestDispatcher(success);
 				successView.forward(req, res);
