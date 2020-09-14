@@ -3,7 +3,6 @@ package com.BounsMall.controller;
 import java.io.*;
 import java.sql.*;
 
-import javax.naming.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
